@@ -1,0 +1,20 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Downloaded models and generated local data
+.models/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store

@@ -1,7 +1,8 @@
 # CS 690 Assignment 2: Ask the Code
 
-This repository is the starter code for Assignment 2. The assignment itself, what to do
-and why, is in **HANDOUT.md**. This file covers setup and the commands you will run.
+This folder holds the code for Assignment 2. The assignment itself, what to do and why,
+is in **HANDOUT.md**. This file covers setup, the commands you will run, and what to
+submit.
 
 ## What you need
 
@@ -14,10 +15,12 @@ and why, is in **HANDOUT.md**. This file covers setup and the commands you will 
 
 ## Setup
 
-**1. Get the code.** Clone the repository and go into it:
+**1. Get the code.** Clone the repository and go into the assignment folder:
 
-    git clone <the repository URL from Canvas>
-    cd cs690-a2-ask-the-code
+    git clone https://github.com/ga424/cs690_assignment2.git
+    cd cs690_assignment2/cs690-a2-ask-the-code
+
+The code lives in the `cs690-a2-ask-the-code` folder, not at the top of the repository.
 
 **2. Make a virtual environment and turn it on.**
 
@@ -56,7 +59,8 @@ about 67 MB). You are ready when it prints "All checks passed."
 
 ## Commands
 
-All commands run from the top folder of the repository, with the virtual environment on.
+All commands run from the `cs690-a2-ask-the-code` folder (the one with `pytest.ini`),
+with the virtual environment on.
 
 Check your code, one step at a time:
 
@@ -97,16 +101,32 @@ Other commands:
 | REPORT.md | Your report; fill it in during Step 8 |
 | LEDGER.md | Your provenance ledger |
 | prompts/ | The prompts you gave AI tools, one file per ledger entry |
-| questions/questions.json | Your ten questions (Step 1) |
+| questions/questions.json | Your ten questions; yours to write (Step 1) |
 | askcode/core.py | Given: the types and helpers everything uses. Read it first |
-| askcode/split.py, search_words.py, prompt.py, answer.py, search_meaning.py | Yours to write |
+| askcode/split.py, search_words.py, prompt.py, answer.py, search_meaning.py | Your five code files; yours to write |
 | askcode/llm.py, embed.py, run_eval.py, summary.py, questions.py, check_setup.py, check_freeze.py | Given; do not change |
 | tests/ | Public tests; do not change |
 | corpus/requests/ | The requests library, v2.32.3, unmodified; do not change |
 | results/ | Your experiment results; created by run_eval; commit it |
 | ai_replies/ | Every AI reply, saved; created by run_eval; commit it |
-| .env | Your key and settings; never commit it |
+| .env.example | The settings template; copy it to `.env` |
+| .env | Your key and settings; ignored by git, never commit it |
+| .venv/ | Your virtual environment; ignored by git |
 | .models/ | The downloaded embedding model; ignored by git |
+
+## What to submit
+
+Push your repository to GitHub and submit the repo link on Canvas. It must contain:
+
+- your five code files and `questions/questions.json`
+- `results/` with the six files: retrieval_words, retrieval_meaning,
+  top3_words_five_part, whole_five_part, gold_five_part, top3_words_minimal
+- `ai_replies/`
+- `REPORT.md`, `LEDGER.md` and `prompts/`
+
+`.gitignore` leaves out `.env`, the virtual environment and `.models/`. It does not
+leave out `results/` or `ai_replies/`; commit them, because the grader reproduces your
+results from them. Before you push, run `python -m askcode.check_freeze`.
 
 ## Troubleshooting
 

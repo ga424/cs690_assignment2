@@ -113,3 +113,22 @@ checks:    pytest tests/test_answer.py: 15 passed (run by Claude Code, 2026-10-1
 evidence:  HANDOUT Step 4 part B; answer.py docstring rules 1 to 5
 risk:      a fence line with extra words, such as ```python, is rejected; the docstring
            allows only ``` or ```json
+
+## Entry 6
+artifact:  askcode/search_meaning.py at commit 0447786
+tool:      Claude Code in VS Code with the agentic-sdlc plugin 0.3.3, model Claude Opus 5.5
+           (claude-opus-5-5), 2026-10-12
+prompts:   asked Claude to draft Step 7, cosine and MeaningIndex; prompts/meaning-01.md
+review:    [ga424: PENDING. Read every line against the search_meaning.py docstrings; say
+           what you changed or rejected, and whether you keep the k <= 0 guard, which the
+           docstring does not ask for]
+checks:    pytest tests/test_search_meaning.py: 6 passed (run by Claude Code, 2026-10-12);
+           a throwaway script for cases the public tests do not check (both vectors zero,
+           negative values, ties keep chunk order, k larger than the number of chunks,
+           one embed_passages call, empty chunk list): all passed; the real local model
+           on example-1 ranked SessionRedirectMixin.should_strip_auth first, and on
+           example-2 (no answer in the code) still returned 3 unrelated chunks, as the
+           docstring says it must
+evidence:  HANDOUT Step 7; search_meaning.py docstrings for cosine, __init__ and search
+risk:      the docstring does not say what cosine([0, 0], [1]) should do; the draft checks
+           the length first and raises ValueError (open question for the instructor)

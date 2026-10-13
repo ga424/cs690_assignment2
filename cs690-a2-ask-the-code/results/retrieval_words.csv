@@ -1,0 +1,11 @@
+id,question,expected_file,expected_function,retrieved,hit,hit_rank
+q01,How does requests decide whether to remove the Authorization header on an http-to-https redirect to the same host?,sessions.py,SessionRedirectMixin.should_strip_auth,sessions.py::SessionRedirectMixin.should_strip_auth; adapters.py::HTTPAdapter.send; auth.py::HTTPDigestAuth.handle_401,yes,1
+q02,How does requests handle a relative Location header during a redirect?,sessions.py,SessionRedirectMixin.resolve_redirects,sessions.py::SessionRedirectMixin.resolve_redirects; sessions.py::SessionRedirectMixin.get_redirect_target; sessions.py::SessionRedirectMixin.should_strip_auth,yes,1
+q03,How does requests treat header names like 'Content-Type' and 'content-type'?,structures.py,CaseInsensitiveDict.__getitem__,sessions.py::SessionRedirectMixin.resolve_redirects; adapters.py::HTTPAdapter.send; utils.py::extract_zipped_paths,no,
+q04,What does requests do with URL query parameters before sending a request?,models.py,PreparedRequest.prepare_url,api.py::request; models.py::PreparedRequest.prepare_url; sessions.py::Session.request,yes,2
+q05,"When JSON is passed as the request body, how does requests serialize it?",models.py,PreparedRequest.prepare_body,models.py::RequestEncodingMixin._encode_files; api.py::request; api.py::post,no,
+q06,What happens if a request-specific setting is set to None while the session has a value?,sessions.py,merge_setting,sessions.py::Session.send; sessions.py::merge_setting; sessions.py::Session.request,yes,2
+q07,What prevents infinite redirect loops in requests?,sessions.py,SessionRedirectMixin.resolve_redirects,utils.py::extract_zipped_paths; adapters.py::HTTPAdapter.send; models.py::Response.__init__,no,
+q08,How does requests handle non-ASCII hostnames in URLs?,models.py,PreparedRequest._get_idna_encoded_host,models.py::PreparedRequest.prepare_url; utils.py::should_bypass_proxies; sessions.py::SessionRedirectMixin.get_redirect_target,no,
+q09,How does requests combine session hooks with request hooks?,sessions.py,merge_hooks,sessions.py::merge_hooks; sessions.py::Session.__init__; sessions.py::Session.prepare_request,yes,1
+q10,Which company pays for hosting the requests documentation?,,,__init__.py::check_compatibility; __init__.py::_check_cryptography; adapters.py::_urllib3_request_context,n/a,

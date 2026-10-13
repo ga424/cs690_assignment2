@@ -1,16 +1,72 @@
 [
   {
-    "id": "example-1",
-    "question": "Does requests keep the Authorization header when a redirect goes from http to https on the same host?",
+    "id": "q01",
+    "question": "How does requests decide whether to remove the Authorization header on an http-to-https redirect to the same host?",
     "expected_file": "sessions.py",
     "expected_function": "SessionRedirectMixin.should_strip_auth",
-    "expected_answer": "Yes. For an http to https redirect on the same host with the standard ports, should_strip_auth returns False, so the header is kept (lines 137 to 143)."
+    "expected_answer": "It returns False when the host stays the same and both URLs use the default ports for their schemes, so the Authorization header is preserved on the redirect."
   },
   {
-    "id": "example-2",
+    "id": "q02",
+    "question": "How does requests handle a relative Location header during a redirect?",
+    "expected_file": "sessions.py",
+    "expected_function": "SessionRedirectMixin.resolve_redirects",
+    "expected_answer": "It resolves the relative URL against the current response URL, preserves the previous fragment if needed, and re-encodes the final URL before retrying the request."
+  },
+  {
+    "id": "q03",
+    "question": "How does requests treat header names like 'Content-Type' and 'content-type'?",
+    "expected_file": "structures.py",
+    "expected_function": "CaseInsensitiveDict.__getitem__",
+    "expected_answer": "It stores headers by their lowercase key and looks them up with the same lowercased form, so header names are case-insensitive."
+  },
+  {
+    "id": "q04",
+    "question": "What does requests do with URL query parameters before sending a request?",
+    "expected_file": "models.py",
+    "expected_function": "PreparedRequest.prepare_url",
+    "expected_answer": "It encodes the params, appends them to any existing query string, and then re-encodes the full URL while validating the scheme and host."
+  },
+  {
+    "id": "q05",
+    "question": "When JSON is passed as the request body, how does requests serialize it?",
+    "expected_file": "models.py",
+    "expected_function": "PreparedRequest.prepare_body",
+    "expected_answer": "It dumps the JSON with allow_nan=False, sets the Content-Type to application/json, and encodes the result as UTF-8 bytes before sending."
+  },
+  {
+    "id": "q06",
+    "question": "What happens if a request-specific setting is set to None while the session has a value?",
+    "expected_file": "sessions.py",
+    "expected_function": "merge_setting",
+    "expected_answer": "The None value is removed from the merged dictionary, so the session value survives instead of being overwritten by None."
+  },
+  {
+    "id": "q07",
+    "question": "What prevents infinite redirect loops in requests?",
+    "expected_file": "sessions.py",
+    "expected_function": "SessionRedirectMixin.resolve_redirects",
+    "expected_answer": "It keeps track of previous responses in resp.history and raises TooManyRedirects once the redirect count reaches the session's max_redirects."
+  },
+  {
+    "id": "q08",
+    "question": "How does requests handle non-ASCII hostnames in URLs?",
+    "expected_file": "models.py",
+    "expected_function": "PreparedRequest._get_idna_encoded_host",
+    "expected_answer": "It IDNA-encodes the hostname and raises InvalidURL if the hostname contains an invalid label."
+  },
+  {
+    "id": "q09",
+    "question": "How does requests combine session hooks with request hooks?",
+    "expected_file": "sessions.py",
+    "expected_function": "merge_hooks",
+    "expected_answer": "It leaves the request hooks alone when the session hooks are empty, and otherwise merges the dictionaries so the request can override or extend the session behavior."
+  },
+  {
+    "id": "q10",
     "question": "Which company pays for hosting the requests documentation?",
     "expected_file": null,
     "expected_function": null,
-    "expected_answer": "The code cannot answer this. A correct reply says not found in the code shown, with null file and line."
+    "expected_answer": "The code cannot answer this; there is no information about hosting providers in the codebase."
   }
 ]

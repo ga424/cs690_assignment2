@@ -9,7 +9,7 @@ no key; the first run downloads it once, about 67 MB, into the .models folder.
 
 from __future__ import annotations
 
-import math  # noqa: F401  (you will need it)
+import math
 from collections.abc import Callable
 
 from askcode import embed
@@ -22,7 +22,13 @@ def cosine(a: list[float], b: list[float]) -> float:
     Return 0.0 if either vector has length 0 (all zeros).
     Raise ValueError if the two vectors do not have the same number of numbers.
     """
-    raise NotImplementedError("Step 7: write cosine in askcode/search_meaning.py")
+    if len(a) != len(b):
+        raise ValueError(f"vectors have different lengths: {len(a)} and {len(b)}")
+    length_a = math.sqrt(sum(x * x for x in a))
+    length_b = math.sqrt(sum(y * y for y in b))
+    if length_a == 0 or length_b == 0:
+        return 0.0
+    return sum(x * y for x, y in zip(a, b)) / (length_a * length_b)
 
 
 class MeaningIndex:
@@ -43,7 +49,13 @@ class MeaningIndex:
            order of `chunks`. One call is far faster than one call per chunk.
         4. Keep what you need for search: the chunks, their vectors, and embed_query.
         """
-        raise NotImplementedError("Step 7: write MeaningIndex.__init__ in askcode/search_meaning.py")
+        if embed_passages is None:
+            embed_passages = embed.embed_passages
+        if embed_query is None:
+            embed_query = embed.embed_query
+        self.chunks = list(chunks)
+        self.embed_query = embed_query
+        self.vectors = embed_passages([c.name + "\n" + c.text for c in self.chunks])
 
     def search(self, question: str, k: int = 3) -> list[Chunk]:
         """Return the k chunks whose vectors are closest in meaning to the question.
@@ -56,4 +68,9 @@ class MeaningIndex:
         Unlike word search, this always returns k chunks (or every chunk, if there
         are fewer than k), even when none of them is relevant (slide 56).
         """
-        raise NotImplementedError("Step 7: write MeaningIndex.search in askcode/search_meaning.py")
+        if k <= 0:
+            return []
+        query = self.embed_query(question)
+        scores = [cosine(query, vector) for vector in self.vectors]
+        order = sorted(range(len(self.chunks)), key=lambda i: (-scores[i], i))
+        return [self.chunks[i] for i in order[:k]]

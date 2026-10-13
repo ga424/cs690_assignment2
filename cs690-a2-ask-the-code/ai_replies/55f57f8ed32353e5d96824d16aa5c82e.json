@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "55f57f8ed32353e5d96824d16aa5c82e",
+  "asked_at": "2026-10-13T00:40:53+00:00",
+  "input_tokens": 2045,
+  "output_tokens": 248,
+  "text": "{\n  \"answer\": \"The HTTPAdapter disables automatic redirect following in urllib3 by passing `redirect=False` to `conn.urlopen`. Requests handles redirects itself, where it can enforce its redirect limit and prevent infinite redirect chains.\",\n  \"file\": \"adapters.py\",\n  \"line\": 672\n}"
+}

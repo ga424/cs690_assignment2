@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "895db6fe23d41af311239a9994fff723",
+  "asked_at": "2026-10-13T00:40:41+00:00",
+  "input_tokens": 2603,
+  "output_tokens": 139,
+  "text": "{\n  \"answer\": \"Requests converts the URL to a string, strips leading whitespace, and parses it into its components. It validates the scheme and host, IDNA-encodes non-ASCII hostnames, ensures a path exists, and encodes the supplied `params` using `_encode_params`. If the original URL already has a query string, the encoded parameters are appended with `&`; otherwise they become the query string. Finally, it reconstructs and requotes the URL, storing the result in `self.url`. The request is then prepared and sent using this final URL.\",\n  \"file\": \"models.py\",\n  \"line\": \"409-481\"\n}"
+}

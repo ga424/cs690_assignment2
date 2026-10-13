@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "a9c7b7b721d08e1ef3024105f6f97625",
+  "asked_at": "2026-10-13T00:40:49+00:00",
+  "input_tokens": 2038,
+  "output_tokens": 185,
+  "text": "{\n  \"answer\": \"The session value is used. In `merge_setting`, when `request_setting` is `None`, it returns `session_setting`; therefore, setting a request-specific option such as `verify`, `cert`, or `stream` to `None` does not override the session setting. The resulting value is passed to `Session.send`.\",\n  \"file\": \"sessions.py\",\n  \"line\": \"67-72, 579-589\"\n}"
+}

@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "082caf4a7fea611b724584ff68cfc49e",
+  "asked_at": "2026-10-13T00:41:05+00:00",
+  "input_tokens": 1285,
+  "output_tokens": 617,
+  "text": "{\n  \"answer\": \"Requests combines hooks in Session.prepare_request() at line 496 using merge_hooks(request.hooks, self.hooks). merge_hooks treats an empty response-hook list specially: if the session has no response hooks, it returns the request hooks; if the request has no response hooks, it returns the session hooks. If both contain response hooks, merge_setting() is used, with session hooks as the base and request hooks taking precedence for duplicate keys. The hook lists are not concatenated; a request-level response hook list replaces the session-level list when both are non-empty. By default, request hooks are usually {'response': []}, so session response hooks are preserved.\",\n  \"file\": \"requests/sessions.py\",\n  \"line\": \"91-103, 496\"\n}"
+}

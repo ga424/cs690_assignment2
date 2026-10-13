@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "ff3d7706a29de733e027d69aa983de08",
+  "asked_at": "2026-10-13T00:40:35+00:00",
+  "input_tokens": 1874,
+  "output_tokens": 229,
+  "text": "{\n  \"answer\": \"Requests reads the Location header, decodes it, and resolves it against the URL of the response being redirected. A scheme-relative Location such as //example.com/path inherits the original response's scheme. For other relative locations, Requests percent-encodes the URI and uses urljoin(resp.url, requote_uri(url)). Thus, /next resolves from the origin root, next resolves relative to the current response path, and ../next resolves against the current directory. If the Location has no fragment, the previous URL fragment is preserved; an explicitly supplied fragment replaces it. The resulting URL is assigned to the copied PreparedRequest, after which Requests rebuilds method, headers, cookies, authentication, proxies, and possibly the request body before sending the redirect.\",\n  \"file\": \"requests/sessions.py\",\n  \"line\": \"198-219 (relative-URL processing); 107-124 (reading and decoding Location)\"\n}"
+}

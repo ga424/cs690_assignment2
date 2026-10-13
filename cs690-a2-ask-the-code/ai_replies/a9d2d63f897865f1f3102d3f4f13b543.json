@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "a9d2d63f897865f1f3102d3f4f13b543",
+  "asked_at": "2026-10-13T00:40:39+00:00",
+  "input_tokens": 2733,
+  "output_tokens": 256,
+  "text": "{\n  \"answer\": \"Requests treats HTTP header names case-insensitively. `Content-Type`, `content-type`, and other casing variants refer to the same header because request headers use a `CaseInsensitiveDict`. Therefore, `headers.pop(\\\"Content-Type\\\", None)` also removes a header originally supplied as `content-type`. The value is associated with one normalized case-insensitive key, while the most recently assigned spelling may be preserved for output.\",\n  \"file\": \"requests/sessions.py\",\n  \"line\": \"229-231\"\n}"
+}

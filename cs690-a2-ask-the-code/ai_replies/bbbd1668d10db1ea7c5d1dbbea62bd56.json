@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "bbbd1668d10db1ea7c5d1dbbea62bd56",
+  "asked_at": "2026-10-13T00:41:08+00:00",
+  "input_tokens": 1168,
+  "output_tokens": 269,
+  "text": "{\"answer\":\"Read the Docs\",\"file\":\"docs/index.rst\",\"line\":null}"
+}

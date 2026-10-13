@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "fd8d1731db4ab930e45c073594f76fdf",
+  "asked_at": "2026-10-13T00:40:32+00:00",
+  "input_tokens": 1934,
+  "output_tokens": 362,
+  "text": "{\n  \"answer\": \"For an HTTP-to-HTTPS redirect on the same hostname, Requests keeps the Authorization header only when the original URL uses port 80 (or no explicit port) and the redirected URL uses port 443 (or no explicit port). In that case, should_strip_auth() returns false. For example, http://example.com -> https://example.com preserves Authorization. If either side uses a non-standard port, the special case does not apply; because the scheme changed, the final logic returns true and strips the header. Redirects to a different hostname always strip it. HTTPAdapter.send() does not make this decision; redirect handling in SessionRedirectMixin calls should_strip_auth() before sending the next request. HTTPDigestAuth.handle_401() is separate and handles Digest authentication challenges, not this redirect policy.\",\n  \"file\": \"sessions.py (SessionRedirectMixin.should_strip_auth), lines 127-157; adapters.py (HTTPAdapter.send), lines 613-719; auth.py (HTTPDigestAuth.handle_401), lines 241-283\",\n  \"line\": \"The HTTP-to-HTTPS exception is implemented at sessions.py lines 133-143. The fallback scheme/port comparison is at lines 145-157.\"\n}"
+}

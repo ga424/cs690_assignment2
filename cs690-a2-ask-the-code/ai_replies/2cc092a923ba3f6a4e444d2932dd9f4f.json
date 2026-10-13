@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "2cc092a923ba3f6a4e444d2932dd9f4f",
+  "asked_at": "2026-10-13T00:40:47+00:00",
+  "input_tokens": 1735,
+  "output_tokens": 432,
+  "text": "{\n  \"answer\": \"When you pass a Python object using the `json=` parameter, Requests serializes it with `json.dumps()` (via `complexjson.dumps`), encodes the resulting JSON text as UTF-8 bytes, and sets `Content-Type: application/json` unless you provide that header yourself. For example, `requests.post(url, json={\\\"a\\\": 1})` sends the body `{\\\"a\\\": 1}`. The `_encode_files` method is only used for multipart requests involving `files=`. If you pass `data=` instead, Requests does not JSON-serialize the value automatically; a string or bytes value is sent as provided.\",\n  \"file\": \"requests/models.py\",\n  \"line\": \"PreparedRequest.prepare_body, approximately lines 500–518\"\n}"
+}

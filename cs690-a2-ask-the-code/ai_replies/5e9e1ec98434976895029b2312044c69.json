@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "5e9e1ec98434976895029b2312044c69",
+  "asked_at": "2026-10-13T00:40:58+00:00",
+  "input_tokens": 1661,
+  "output_tokens": 340,
+  "text": "{\n  \"answer\": \"Requests accepts Unicode hostnames and converts them to ASCII using IDNA (punycode) before sending the request. In `PreparedRequest.prepare_url`, a bytes URL is first decoded as UTF-8 and other URL objects are converted to strings. The URL is parsed, and if the hostname contains non-ASCII characters, `_get_idna_encoded_host()` encodes it. Invalid IDNA labels raise `InvalidURL`. ASCII hostnames beginning with `*` or `.` are also rejected. The hostname is then reconstructed into the URL, while the path, query, and fragment are requoted as needed. For example, `https://münich.example/` becomes an URL using an IDNA hostname such as `https://xn--mnich-kva.example/`. Proxy bypass checks use the parsed hostname separately, and redirect `Location` headers are reinterpreted from Latin-1 to UTF-8 before being followed.\",\n  \"file\": \"models.py; utils.py; sessions.py\",\n  \"line\": \"models.py 409-481 (especially 446-454); utils.py 765-823; sessions.py 107-125\"\n}"
+}

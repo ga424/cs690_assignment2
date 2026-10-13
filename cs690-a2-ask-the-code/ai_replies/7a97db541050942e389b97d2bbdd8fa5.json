@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "7a97db541050942e389b97d2bbdd8fa5",
+  "asked_at": "2026-10-13T00:40:07+00:00",
+  "input_tokens": 680,
+  "output_tokens": 70,
+  "text": "{\"answer\":\"It keeps the Authorization header for an http-to-https redirect on the same host when the old port is 80 or unspecified and the new port is 443 or unspecified, returning False. This is shown by the special-case condition and return at lines 137-143.\",\"file\":\"sessions.py\",\"line\":143}"
+}

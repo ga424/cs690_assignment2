@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "dfa5ba5d38a05d3cae87de01cb525026",
+  "asked_at": "2026-10-13T00:40:11+00:00",
+  "input_tokens": 1056,
+  "output_tokens": 61,
+  "text": "{\"answer\":\"Requests encodes the URL query parameters with _encode_params and appends them to any existing query string, using '&' when needed, before requoting and assigning the resulting URL. It does this at lines 473-480.\",\"file\":\"models.py\",\"line\":473}"
+}

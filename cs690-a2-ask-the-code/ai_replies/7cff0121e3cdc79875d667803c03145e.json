@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "7cff0121e3cdc79875d667803c03145e",
+  "asked_at": "2026-10-13T00:40:18+00:00",
+  "input_tokens": 456,
+  "output_tokens": 56,
+  "text": "{\"answer\":\"It returns the request hooks if session hooks are absent or have an empty response list, returns the session hooks if request hooks are absent or have an empty response list, and otherwise merges them with merge_setting.\",\"file\":\"sessions.py\",\"line\":97}"
+}

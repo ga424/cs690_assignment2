@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "3c8cb6c4dfac121cb3172aca55e61aa3",
+  "asked_at": "2026-10-13T00:40:16+00:00",
+  "input_tokens": 1502,
+  "output_tokens": 47,
+  "text": "{\"answer\":\"Requests prevents infinite redirect loops by counting redirects and raising TooManyRedirects when the configured maximum is reached, as shown by the check against self.max_redirects.\",\"file\":\"sessions.py\",\"line\":190}"
+}

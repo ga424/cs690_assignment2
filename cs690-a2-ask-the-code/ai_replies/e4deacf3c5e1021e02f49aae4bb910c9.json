@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "e4deacf3c5e1021e02f49aae4bb910c9",
+  "asked_at": "2026-10-13T00:40:10+00:00",
+  "input_tokens": 353,
+  "output_tokens": 30,
+  "text": "{\"answer\":\"It treats them equivalently by converting the header name to lowercase before lookup.\",\"file\":\"structures.py\",\"line\":52}"
+}

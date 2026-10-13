@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "ac3086b5d613e825c13c42405d964820",
+  "asked_at": "2026-10-13T00:40:17+00:00",
+  "input_tokens": 405,
+  "output_tokens": 50,
+  "text": "{\"answer\":\"It encodes non-ASCII hostnames using IDNA with UTS 46 processing, decodes the result as UTF-8, and raises UnicodeError if encoding fails.\",\"file\":\"models.py\",\"line\":404}"
+}

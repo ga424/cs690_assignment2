@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "e69b34adffefede726b2608e12786dd0",
+  "asked_at": "2026-10-13T00:40:08+00:00",
+  "input_tokens": 1506,
+  "output_tokens": 48,
+  "text": "{\"answer\":\"It resolves the relative Location URL against the previous response URL using urljoin, after percent-encoding it with requote_uri. This is shown on line 215.\",\"file\":\"sessions.py\",\"line\":215}"
+}

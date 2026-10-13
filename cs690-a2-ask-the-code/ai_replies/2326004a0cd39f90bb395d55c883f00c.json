@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "2326004a0cd39f90bb395d55c883f00c",
+  "asked_at": "2026-10-13T00:39:30+00:00",
+  "input_tokens": 1940,
+  "output_tokens": 51,
+  "text": "{\"answer\":\"Requests IDNA-encodes non-ASCII hostnames using _get_idna_encoded_host, raising InvalidURL if encoding fails. This is shown at lines 450–454.\",\"file\":\"models.py\",\"line\":450}"
+}

@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "37da62900f2751edb2545dc6906a60ca",
+  "asked_at": "2026-10-13T00:39:26+00:00",
+  "input_tokens": 2317,
+  "output_tokens": 51,
+  "text": "{\"answer\":\"The request-specific None setting is removed from the merged settings, so it does not override the session value. This is shown by deleting keys whose value is None at line 86.\",\"file\":\"sessions.py\",\"line\":86}"
+}

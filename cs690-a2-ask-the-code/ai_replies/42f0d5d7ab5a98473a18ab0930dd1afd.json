@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "42f0d5d7ab5a98473a18ab0930dd1afd",
+  "asked_at": "2026-10-13T00:39:18+00:00",
+  "input_tokens": 2153,
+  "output_tokens": 46,
+  "text": "{\"answer\":\"It resolves a relative Location header against the previous response URL after percent-encoding it, using urljoin; the resulting URL is assigned to the prepared request.\",\"file\":\"sessions.py\",\"line\":215}"
+}

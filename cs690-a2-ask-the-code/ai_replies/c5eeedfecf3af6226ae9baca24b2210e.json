@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "c5eeedfecf3af6226ae9baca24b2210e",
+  "asked_at": "2026-10-13T00:39:32+00:00",
+  "input_tokens": 1564,
+  "output_tokens": 86,
+  "text": "{\"answer\":\"Requests combines session hooks with request hooks using merge_hooks; if either hook mapping is absent or has an empty response list, it returns the other mapping, otherwise it merges both settings. This is shown where prepare_request passes request.hooks and self.hooks to merge_hooks on line 496 and where merge_hooks implements the behavior on lines 97-103.\",\"file\":\"sessions.py\",\"line\":496}"
+}

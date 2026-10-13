@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "716618809220b18cd35ab41e6ea77171",
+  "asked_at": "2026-10-13T00:39:20+00:00",
+  "input_tokens": 3011,
+  "output_tokens": 57,
+  "text": "{\"answer\":\"Requests treats header names case-insensitively when removing them during redirects: it calls `prepared_request.headers.pop(\\\"Content-Type\\\", None)`, which applies to a header named `content-type` as well.\",\"file\":\"sessions.py\",\"line\":231}"
+}

@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "a77c77f3497eb559b4fc2d0e7233eb8d",
+  "asked_at": "2026-10-13T00:39:22+00:00",
+  "input_tokens": 2882,
+  "output_tokens": 57,
+  "text": "{\"answer\":\"It encodes the query parameters and appends them to the URL's existing query string, or uses them as the query string if none exists. This is shown by lines 473–478 in models.py.\",\"file\":\"models.py\",\"line\":473}"
+}

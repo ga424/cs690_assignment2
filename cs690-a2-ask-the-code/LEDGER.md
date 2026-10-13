@@ -132,3 +132,94 @@ checks:    pytest tests/test_search_meaning.py: 6 passed (run by Claude Code, 20
 evidence:  HANDOUT Step 7; search_meaning.py docstrings for cosine, __init__ and search
 risk:      the docstring does not say what cosine([0, 0], [1]) should do; the draft checks
            the length first and raises ValueError (open question for the instructor)
+
+## Entry 7
+artifact:  results/retrieval_words.csv at commit 84acf0a
+tool:      askcode run_eval (no AI calls), run by Claude Code (Claude Opus 5.5) at my request, 2026-10-12
+prompts:   no AI prompt; prompts/runs-01.md
+review:    [ga424: PENDING. Read the retrieved column for the misses q03, q05, q07, q08
+           and say why word search missed them]
+checks:    python -m askcode.run_eval --search words --no-ai: right function in the top 3,
+           5 of 9 answerable questions; check_freeze: PASS
+evidence:  HANDOUT Step 3
+risk:      word search only; says nothing yet about answer quality
+dataset:   questions/questions.json at commit 3178a5c; corpus requests v2.32.3
+result:    right function in top 3, N = 9 answerable: 5 of 9; results/retrieval_words.csv
+changed:   [ga424: PENDING. What you did differently as a result]
+## Entry 8
+artifact:  results/retrieval_meaning.csv at commit 84acf0a
+tool:      askcode run_eval (local model BAAI/bge-small-en-v1.5, no API calls),
+           run by Claude Code (Claude Opus 5.5) at my request, 2026-10-12
+prompts:   no AI prompt; prompts/runs-01.md
+review:    [ga424: PENDING. Compare with retrieval_words in Table 4: meaning found q05 and
+           q07 that words missed; words found q02 that meaning missed; neither found q03 or q08]
+checks:    python -m askcode.run_eval --search meaning --no-ai: right function in the top 3,
+           6 of 9 answerable questions
+evidence:  HANDOUT Step 7
+risk:      one embedding model only; q10 (no answer) still gets 3 chunks back
+dataset:   questions/questions.json at commit 3178a5c; corpus requests v2.32.3
+result:    right function in top 3, N = 9: 6 of 9 (words: 5 of 9); results/retrieval_meaning.csv; Table 4
+changed:   [ga424: PENDING. What you did differently as a result]
+## Entry 9
+artifact:  results/top3_words_five_part.csv at commit cbb7918
+tool:      askcode run_eval, openai gpt-5.6-luna, run by Claude Code (Claude Opus 5.5) at my
+           request, 2026-10-12
+prompts:   five-part prompt in askcode/prompt.py at commit 47e3902; prompts/runs-01.md
+review:    [ga424: PENDING. Read all ten replies, mark correct yes or no against
+           questions.json, then write what you read and found]
+checks:    python -m askcode.run_eval --search words --context top3 --prompt five_part:
+           valid JSON 10 of 10, right place 5 of 10, 21,865 in, 521 out, $0.0024
+evidence:  HANDOUT Step 5
+risk:      one run only; a fresh run may answer differently
+dataset:   questions/questions.json at commit 3178a5c; corpus requests v2.32.3
+result:    valid JSON 10 of 10, right place 5 of 10, correct [PENDING] of 10, 21,865 input
+           tokens, $0.0024; results/top3_words_five_part.csv
+changed:   [ga424: PENDING. What you did differently as a result]
+## Entry 10
+artifact:  results/whole_five_part.csv at commit 07cd8f6
+tool:      askcode run_eval, openai gpt-5.6-luna, run by Claude Code (Claude Opus 5.5) at my
+           request, 2026-10-12
+prompts:   five-part prompt in askcode/prompt.py at commit 47e3902, whole corpus as context;
+           prompts/runs-01.md
+review:    [ga424: PENDING. Read all ten replies, mark correct yes or no against
+           questions.json, then write what you read and found]
+checks:    python -m askcode.run_eval --context whole --prompt five_part: valid JSON 10 of 10,
+           right place 8 of 10, 548,025 in, 548 out, $0.0551
+evidence:  HANDOUT Step 5
+risk:      one run only; about 23 times the input tokens of the top3 run
+dataset:   questions/questions.json at commit 3178a5c; corpus requests v2.32.3
+result:    valid JSON 10 of 10, right place 8 of 10, correct [PENDING] of 10, 548,025 input
+           tokens, $0.0551; results/whole_five_part.csv
+changed:   [ga424: PENDING. What you did differently as a result]
+## Entry 11
+artifact:  results/gold_five_part.csv at commit 7e23d6b
+tool:      askcode run_eval, openai gpt-5.6-luna, run by Claude Code (Claude Opus 5.5) at my
+           request, 2026-10-12
+prompts:   five-part prompt in askcode/prompt.py at commit 47e3902, only the expected function
+           as context; prompts/runs-01.md
+review:    [ga424: PENDING. Read all ten replies, mark correct yes or no against
+           questions.json, then write what you read and found]
+checks:    python -m askcode.run_eval --context gold --prompt five_part: valid JSON 10 of 10,
+           right place 10 of 10, 7,896 in, 486 out, $0.0010
+evidence:  HANDOUT Step 5
+risk:      one run only
+dataset:   questions/questions.json at commit 3178a5c; corpus requests v2.32.3
+result:    valid JSON 10 of 10, right place 10 of 10, correct [PENDING] of 10, 7,896 input
+           tokens, $0.0010; results/gold_five_part.csv
+changed:   [ga424: PENDING. What you did differently as a result]
+## Entry 12
+artifact:  results/top3_words_minimal.csv at commit eb741e2
+tool:      askcode run_eval, openai gpt-5.6-luna, run by Claude Code (Claude Opus 5.5) at my
+           request, 2026-10-12
+prompts:   minimal prompt, build_prompt_minimal in askcode/core.py (given); prompts/runs-01.md
+review:    [ga424: PENDING. Read all ten replies, mark correct yes or no against
+           questions.json, then write what you read and found]
+checks:    python -m askcode.run_eval --search words --context top3 --prompt minimal: valid
+           JSON 1 of 10, right place 0 of 10, 19,076 in, 3,077 out, $0.0034
+evidence:  HANDOUT Step 6
+risk:      one run only; most replies failed parse_reply, so right place is 0 by
+           construction, not necessarily because the answers were wrong
+dataset:   questions/questions.json at commit 3178a5c; corpus requests v2.32.3
+result:    valid JSON 1 of 10, right place 0 of 10, correct [PENDING] of 10, 19,076 input
+           tokens, $0.0034 (five-part: 10 of 10 valid); results/top3_words_minimal.csv
+changed:   [ga424: PENDING. What you did differently as a result]

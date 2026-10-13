@@ -80,3 +80,36 @@ checks:    pytest tests/test_search_words.py: 7 passed (run by Claude Code, 2026
 evidence:  HANDOUT Step 3; search_words.py docstring steps 1 to 6
 risk:      order of weights in the sum is not fixed; relies on round(score, 6) to make
            ties exact, as the docstring says
+
+## Entry 4
+artifact:  askcode/prompt.py at commit 47e3902
+tool:      Claude Code in VS Code with the agentic-sdlc plugin 0.3.3, model Claude Opus 5.5
+           (claude-opus-5-5), 2026-10-12
+prompts:   asked Claude to draft Step 4, build_prompt_five_part; prompts/step4-01.md
+review:    [ga424: PENDING. Read the five parts against prompt.py requirements 1 to 6 and
+           the Week 3 slides; say what you changed or rejected. Confirm the example
+           (made-up numbers.py, add_one) is not one of your ten questions]
+checks:    pytest tests/test_prompt.py: 7 passed (run by Claude Code, 2026-10-12);
+           python -m askcode.run_eval --search words --context top3 --prompt five_part
+           --dry-run: prompt printed, about 3,914 input tokens for the 2 example questions;
+           a throwaway script checked the exact user layout and the empty-code case: passed
+evidence:  HANDOUT Step 4 part A; prompt.py docstring requirements 1 to 6
+risk:      the prompt has not been sent to a model yet, so whether it gets valid JSON and
+           the "not found" reply in practice is unmeasured until Step 5
+
+## Entry 5
+artifact:  askcode/answer.py at commit bb68992
+tool:      Claude Code in VS Code with the agentic-sdlc plugin 0.3.3, model Claude Opus 5.5
+           (claude-opus-5-5), 2026-10-12
+prompts:   asked Claude to draft Step 4, parse_reply; prompts/step4-01.md
+review:    [ga424: PENDING. Read every check against answer.py rules 1 to 5; say what you
+           changed or rejected. Decide whether file " " (spaces only) should be bad: the
+           draft follows the rule's wording, "non-empty string", and accepts it]
+checks:    pytest tests/test_answer.py: 15 passed (run by Claude Code, 2026-10-12);
+           a throwaway script for cases the public tests do not check (bare ``` fence,
+           unclosed fence, text outside a fence, JSON number/string/null, whitespace-only
+           or non-string answer, empty or non-string file, negative or float line, null
+           file with a line, 100,000 nested brackets, returns a new dict): all passed
+evidence:  HANDOUT Step 4 part B; answer.py docstring rules 1 to 5
+risk:      a fence line with extra words, such as ```python, is rejected; the docstring
+           allows only ``` or ```json

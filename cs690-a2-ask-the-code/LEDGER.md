@@ -39,6 +39,10 @@ changed:   two misses were retrieval failures, so I looked at why word search mi
 
 ## My entries
 
+Correction notice (2026-10-12): Entry 15 corrects statements in entries 5, 7, 8 and 9
+and clarifies statements in entries 3, 4, 6 and 13. Those entries are left exactly as
+they were first written.
+
 ## Entry 1
 artifact:  Step 0 setup: .venv and .env; provider OpenAI, model gpt-5.6-luna, prices $0.10
            input and $0.50 output per million tokens, from the OpenAI pricing page for
@@ -294,20 +298,137 @@ risk:      the review ran in the same Claude Code session that drafted the code,
            findings compare text with the CSVs and git history
 
 ## Entry 15
-artifact:  corrections to REPORT.md (section 1 q07 evidence, section 3 q07 description)
-           and LEDGER.md (entries 5, 7, 8 and 9, and the q08 risk notes) after the review
-           in entry 14
+artifact:  correction of the record after the review in entry 14: REPORT.md section 1
+           (q07 evidence) and section 3 (q07 example) corrected in place, with the original
+           wording quoted below; statements in entries 3 to 9 and 13 corrected or clarified
+           below, with those entries left as written; a note on the q08 answer key
 tool:      Claude Code in VS Code with the agentic-sdlc plugin 0.3.3, model Claude Opus 5.5
-           (claude-opus-5-5), 2026-10-12, used to find the errors (entry 14) and to check
-           the corrected text against the results files and git history; Claude did not
-           write the corrected text
-prompts:   chose to write the corrections myself and have Claude check them;
-           prompts/fixes-01.md
-review:    [ga424: PENDING. What you changed in each place and why]
+           (claude-opus-5-5), 2026-10-12, used to find the errors (entry 14), to compile the
+           evidence for each correction below and to check the corrected text; Claude did not
+           write the corrected REPORT.md sentences or my review fields
+prompts:   chose to correct the record without removing anything: earlier entries stay as
+           written and the corrections are added here; prompts/fixes-01.md
+review:    [ga424: PENDING. In your own words: that you checked each correction below
+           against the rows, code and commits it cites, and what you changed in REPORT.md
+           sections 1 and 3, and why]
 checks:    [filled in after Claude checks the corrected text]
-evidence:  review findings REV-F01 to REV-F07 (entry 14); the q07 rows of
+evidence:  review findings REV-F01 to REV-F07 (entry 14); q07 rows of
            results/top3_words_five_part.csv and results/top3_words_minimal.csv;
-           askcode/answer.py at commit bb68992
-risk:      the checks compare the corrected statements with the results files and git
-           history; they cannot show how a grader will read borderline marks such as the
-           q03 top-3 row or the q08 gold row
+           askcode/answer.py at commit bb68992; corpus/requests/models.py lines 399 to 407
+           and 450 to 456
+risk:      nothing is removed: the original entries stay readable, the original REPORT.md
+           wording is quoted below and stays in git history at commit 29cc68f; borderline
+           marks (q03 top-3 row, q08 gold row) still depend on how a grader reads them
+
+### Corrections to the record
+
+Facts compiled by Claude Code from the files and commits cited in each item.
+
+1. REPORT.md section 1, q07 evidence (corrected in place).
+   Original wording:
+   ~~~
+   The answer never reached the redirect-limit logic in
+   SessionRedirectMixin.resolve_redirects; it instead described a generic redirect
+   pattern from a different file and missed the actual guard against infinite loops.
+   ~~~
+   Evidence: in results/top3_words_five_part.csv the q07 reply was "not found in the code
+   shown" with null file and line, and the retrieved functions were
+   utils.py::extract_zipped_paths, adapters.py::HTTPAdapter.send and
+   models.py::Response.__init__. The adapters.py explanation is the q07 reply in
+   results/top3_words_minimal.csv. The fault label, retrieval, is unchanged.
+
+2. REPORT.md section 3, q07 example (corrected in place).
+   Original wording:
+   ~~~
+   One example of disagreement was q07: the five-part prompt returned the
+   redirect-limit answer from the correct function, while the minimal prompt answered
+   with a generic explanation from adapters.py that mentioned `redirect=False` but did
+   not mention the actual `TooManyRedirects` guard in
+   `SessionRedirectMixin.resolve_redirects`.
+   ~~~
+   Evidence: with the same top-3 code, the five-part q07 reply was "not found in the code
+   shown" (results/top3_words_five_part.csv). The TooManyRedirects answer at
+   sessions.py line 190 came from results/whole_five_part.csv and
+   results/gold_five_part.csv. The two prompts' q07 replies did differ.
+
+3. Entry 5, review.
+   Original wording:
+   ~~~
+   kept the requirement that the file field must be a non-empty string and rejected
+   drafts that accepted null or whitespace-only values. I also kept fence parsing strict
+   to only ``` or ```json, because a file value of " " should be treated as bad.
+   ~~~
+   Evidence: askcode/answer.py has two commits: the course's stub upload (b97cb0f) and
+   one AI draft (bb68992), so there was one draft and none was rejected. parse_reply accepts "file": " " (rule 4 asks only for a non-empty
+   string), accepts a null file with a null line (allowed by rules 4 and 5) and rejects
+   "file": "". The code is kept as committed (prompts/fixes-01.md).
+
+4. Entry 7, changed.
+   Original wording:
+   ~~~
+   moved to semantic retrieval and a stronger prompt in the next runs.
+   ~~~
+   Evidence: no AI run used meaning search. The AI runs are top3_words_five_part and
+   top3_words_minimal (word search), whole_five_part and gold_five_part. Meaning search
+   ran only as retrieval_meaning, with no AI, committed with retrieval_words in 84acf0a
+   before any AI run. The five-part prompt was committed earlier, in 47e3902.
+
+5. Entry 8, changed.
+   Original wording:
+   ~~~
+   I used semantic retrieval as the stronger default when the question words were not
+   literal code tokens, and I kept word search only as a cheap baseline.
+   ~~~
+   Evidence: as in item 4, every AI run that used search used word search, as HANDOUT
+   Steps 5 and 6 prescribe.
+
+6. Entry 9, review.
+   Original wording:
+   ~~~
+   q03 and q07 were answered from the wrong context
+   ~~~
+   Evidence: only q03 was (it cited sessions.py line 231, redirect header removal). The
+   q07 reply was "not found in the code shown", like q05.
+
+7. Entries 3, 4 and 6, review (clarification).
+   Original wording, entry 3:
+   ~~~
+   rejected any change that would count empty chunks, duplicate question words, or word
+   matches in the wrong direction
+   ~~~
+   Original wording, entry 4:
+   ~~~
+   rejected any layout that copied the user's exact question into the same slot or used
+   a non-empty placeholder file
+   ~~~
+   Original wording, entry 6:
+   ~~~
+   rejected any change that kept stale vectors or skipped the cosine-length validation
+   ~~~
+   Evidence: after the course's stub upload (b97cb0f), askcode/search_words.py,
+   askcode/prompt.py and askcode/search_meaning.py each have exactly one commit
+   (762e664, 47e3902, 0447786): one AI draft each, accepted without edits. No
+   alternative draft or change existed to reject.
+
+8. Entry 13, review (clarification).
+   Original wording:
+   ~~~
+   Its check found no problem in REPORT.md
+   ~~~
+   Evidence: true for what that check covered (the marks, the run files, Tables 1 and 2,
+   the section 1 fault labels and three spot-checked claims, prompts/report-check-01.md). It did not compare the q07
+   statements in sections 1 and 3 with the top-3 five-part row; the review in entry 14
+   found both errors.
+
+9. q08 answer key (note; questions/questions.json is frozen and not changed).
+   Expected answer:
+   ~~~
+   It IDNA-encodes the hostname and raises InvalidURL if the hostname contains an invalid
+   label.
+   ~~~
+   Evidence: the named function, PreparedRequest._get_idna_encoded_host, raises
+   UnicodeError (corpus/requests/models.py lines 405 to 406); InvalidURL is raised by its
+   caller, PreparedRequest.prepare_url (lines 450 to 456). So q08 counts as a miss for
+   both searches even though the top-3 word search retrieved prepare_url, and the gold
+   reply (UnicodeError, accurate for the code it saw) is marked yes against an expected
+   answer that says InvalidURL.

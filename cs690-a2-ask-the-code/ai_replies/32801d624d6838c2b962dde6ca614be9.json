@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "32801d624d6838c2b962dde6ca614be9",
+  "asked_at": "2026-10-13T00:39:47+00:00",
+  "input_tokens": 54802,
+  "output_tokens": 96,
+  "text": "{\"answer\":\"Requests encodes the query parameters and appends them to any existing query string before reconstructing the URL; this prepared URL is then used for the request.\",\"file\":\"models.py\",\"line\":473}"
+}

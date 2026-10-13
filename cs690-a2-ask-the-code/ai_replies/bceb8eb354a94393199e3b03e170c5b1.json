@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "bceb8eb354a94393199e3b03e170c5b1",
+  "asked_at": "2026-10-13T00:39:41+00:00",
+  "input_tokens": 54811,
+  "output_tokens": 81,
+  "text": "{\"answer\":\"It keeps the Authorization header for an HTTP-to-HTTPS redirect when the host is unchanged and the old port is 80 or unspecified while the new port is 443 or unspecified; otherwise, it removes it when should_strip_auth returns True. This is shown by the special-case condition and return False in sessions.py line 137.\",\"file\":\"sessions.py\",\"line\":137}"
+}

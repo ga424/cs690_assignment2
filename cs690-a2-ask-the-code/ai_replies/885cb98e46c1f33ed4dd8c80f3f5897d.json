@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "885cb98e46c1f33ed4dd8c80f3f5897d",
+  "asked_at": "2026-10-13T00:39:51+00:00",
+  "input_tokens": 54807,
+  "output_tokens": 37,
+  "text": "{\"answer\":\"The request-specific setting takes the session's value, because merge_setting returns session_setting when request_setting is None.\",\"file\":\"sessions.py\",\"line\":70}"
+}

@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "eed0c5cdbcfb8b8b2eacadc0493e4c89",
+  "asked_at": "2026-10-13T00:39:57+00:00",
+  "input_tokens": 54799,
+  "output_tokens": 57,
+  "text": "{\"answer\":\"requests combines session hooks with request hooks using merge_hooks: if either side has no response hooks, it returns the other; otherwise it merges them with merge_setting. This is implemented at lines 91-103.\",\"file\":\"sessions.py\",\"line\":91}"
+}

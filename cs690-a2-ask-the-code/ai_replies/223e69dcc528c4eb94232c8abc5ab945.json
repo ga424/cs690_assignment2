@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "223e69dcc528c4eb94232c8abc5ab945",
+  "asked_at": "2026-10-13T00:39:49+00:00",
+  "input_tokens": 54804,
+  "output_tokens": 44,
+  "text": "{\"answer\":\"Requests serializes the JSON using `complexjson.dumps(json, allow_nan=False)` and then encodes the resulting string as UTF-8 bytes.\",\"file\":\"models.py\",\"line\":510}"
+}

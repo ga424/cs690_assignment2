@@ -1,0 +1,9 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.6-luna",
+  "prompt_key": "76d48dd46b75ec19d2a3f2e5514acb24",
+  "asked_at": "2026-10-13T00:39:45+00:00",
+  "input_tokens": 54805,
+  "output_tokens": 69,
+  "text": "{\"answer\":\"requests treats header names case-insensitively: 'Content-Type' and 'content-type' refer to the same header, while preserving the casing of the last key set. This is implemented by lowercasing keys for storage and lookup at lines 46-52.\",\"file\":\"structures.py\",\"line\":46}"
+}

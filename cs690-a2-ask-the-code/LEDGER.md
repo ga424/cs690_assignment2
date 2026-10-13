@@ -274,3 +274,21 @@ checks:    python -m askcode.summary: Tables 1 and 2 in REPORT.md match row for 
 evidence:  HANDOUT Step 8; RUBRIC C1, C2, C6
 risk:      the check compared numbers and labels only; the reasoning in sections 1 to 5
            is my own and was not reviewed by AI
+
+## Entry 14
+artifact:  review of REPORT.md, LEDGER.md, results/ and the five code files at commit
+           f1b9a95; nothing was changed by the review
+tool:      Claude Code in VS Code with the agentic-sdlc plugin 0.3.3 (test and review
+           skills), model Claude Opus 5.5 (claude-opus-5-5), 2026-10-12
+prompts:   ran the plugin's test skill (it produced no output) and its review skill;
+           prompts/review-01.md
+review:    [ga424: PENDING. Say which review findings you accepted, which you fixed and
+           how, and which you rejected and why]
+checks:    pytest -q: 47 passed; python -m askcode.check_freeze: PASS; the six run_eval
+           commands rerun in a fresh clone with no API key: identical to the committed
+           CSVs except the correct column; python -m askcode.summary: Tables 1 and 2 match
+           REPORT.md row for row
+evidence:  RUBRIC B4, C1, C2, C6; HANDOUT Step 5 marking rules
+risk:      the review ran in the same Claude Code session that drafted the code, so it is
+           not independent; the code checks are deterministic, and the report and ledger
+           findings compare text with the CSVs and git history

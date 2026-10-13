@@ -47,3 +47,36 @@ review:
 checks:
 evidence:
 risk:
+
+## Entry 2
+artifact:  askcode/split.py at commit 311a190
+tool:      Claude Code in VS Code with the agentic-sdlc plugin 0.3.3, model Claude Opus 5.5
+           (claude-opus-5-5), 2026-10-12
+prompts:   chose "pair programmer" AI help; asked Claude to draft split_file and
+           split_corpus; prompts/split-01.md
+review:    read every line of the AI draft against split.py rules 1 to 6; made no changes.
+           [ga424: add in your own words what you checked and why you accepted it]
+checks:    pytest tests/test_split.py: 8 passed (run by Claude Code, 2026-10-12);
+           a throwaway script for rules the public tests do not check (async def, nested
+           functions and classes, defs inside if/try/with, two decorators, empty file,
+           subfolder sort order): all passed
+evidence:  HANDOUT Step 2; split.py docstring rules 1 to 6
+risk:      not tested on a file that starts with a UTF-8 byte order mark or on a file
+           ast cannot parse
+
+## Entry 3
+artifact:  askcode/search_words.py at commit 762e664
+tool:      Claude Code in VS Code with the agentic-sdlc plugin 0.3.3, model Claude Opus 5.5
+           (claude-opus-5-5), 2026-10-12
+prompts:   asked Claude to draft the next step, search_words; prompts/search-words-01.md
+review:    [ga424: PENDING. Read every line against search_words.py steps 1 to 6; say
+           what you changed or rejected, and whether you keep the k <= 0 guard, which the
+           docstring does not ask for]
+checks:    pytest tests/test_search_words.py: 7 passed (run by Claude Code, 2026-10-12);
+           weights match HANDOUT Step 3: authorization log(230/8) = 3.36, self
+           log(230/155) = 0.39; a throwaway script for rules the public tests do not check
+           (word in every chunk weighs 0, empty chunks, repeated question word, k larger
+           than matches): all passed
+evidence:  HANDOUT Step 3; search_words.py docstring steps 1 to 6
+risk:      order of weights in the sum is not fixed; relies on round(score, 6) to make
+           ties exact, as the docstring says

@@ -292,3 +292,22 @@ evidence:  RUBRIC B4, C1, C2, C6; HANDOUT Step 5 marking rules
 risk:      the review ran in the same Claude Code session that drafted the code, so it is
            not independent; the code checks are deterministic, and the report and ledger
            findings compare text with the CSVs and git history
+
+## Entry 15
+artifact:  corrections to REPORT.md (section 1 q07 evidence, section 3 q07 description)
+           and LEDGER.md (entries 5, 7, 8 and 9, and the q08 risk notes) after the review
+           in entry 14
+tool:      Claude Code in VS Code with the agentic-sdlc plugin 0.3.3, model Claude Opus 5.5
+           (claude-opus-5-5), 2026-10-12, used to find the errors (entry 14) and to check
+           the corrected text against the results files and git history; Claude did not
+           write the corrected text
+prompts:   chose to write the corrections myself and have Claude check them;
+           prompts/fixes-01.md
+review:    [ga424: PENDING. What you changed in each place and why]
+checks:    [filled in after Claude checks the corrected text]
+evidence:  review findings REV-F01 to REV-F07 (entry 14); the q07 rows of
+           results/top3_words_five_part.csv and results/top3_words_minimal.csv;
+           askcode/answer.py at commit bb68992
+risk:      the checks compare the corrected statements with the results files and git
+           history; they cannot show how a grader will read borderline marks such as the
+           q03 top-3 row or the q08 gold row

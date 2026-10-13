@@ -6,9 +6,9 @@ Check your work with:  pytest tests/test_answer.py
 
 from __future__ import annotations
 
-import json  # noqa: F401  (you will need it)
+import json
 
-from askcode.core import BadReply  # noqa: F401  (raise this for every bad reply)
+from askcode.core import BadReply
 
 
 def parse_reply(text: str) -> dict:
@@ -30,4 +30,33 @@ def parse_reply(text: str) -> dict:
 
     Return a new dict with exactly the three keys and the values from the reply.
     """
-    raise NotImplementedError("Step 4: write parse_reply in askcode/answer.py")
+    if not isinstance(text, str):
+        raise BadReply("rule 1: the reply is not text")
+    body = text.strip()
+    lines = body.split("\n")
+    if lines[0].strip() in ("```", "```json"):
+        if len(lines) < 2 or lines[-1].strip() != "```":
+            raise BadReply("rule 1: the code fence is not closed on the last line")
+        body = "\n".join(lines[1:-1]).strip()
+
+    try:
+        data = json.loads(body)
+    except (ValueError, RecursionError) as exc:
+        raise BadReply(f"rule 1: the reply is not one JSON object ({exc})") from None
+    if not isinstance(data, dict):
+        raise BadReply("rule 1: the reply is JSON but not an object")
+
+    if set(data) != {"answer", "file", "line"}:
+        raise BadReply(f"rule 2: the keys must be answer, file and line, not {sorted(data)}")
+
+    answer, file, line = data["answer"], data["file"], data["line"]
+    if not isinstance(answer, str) or not answer.strip():
+        raise BadReply("rule 3: answer must be a non-empty string")
+    if file is not None and (not isinstance(file, str) or file == ""):
+        raise BadReply("rule 4: file must be a non-empty string or null")
+    if line is not None and (isinstance(line, bool) or not isinstance(line, int) or line < 1):
+        raise BadReply("rule 4: line must be an integer of at least 1, or null")
+    if (file is None) != (line is None):
+        raise BadReply("rule 5: file and line must both be null or both be set")
+
+    return {"answer": answer, "file": file, "line": line}

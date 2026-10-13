@@ -36,7 +36,7 @@ reply or the retrieved functions.
 | --- | --- | --- | --- | --- |
 | q03 | no | yes | retrieval | The right function was not in the top 3, and the answer explained the behavior using a redirect-header rule instead of the case-insensitive dict implementation. |
 | q05 | no | yes | retrieval | The top-3 context did not include the JSON preparation function, so the model answered with a generic "not found" response instead of the actual serialization logic in PreparedRequest.prepare_body. |
-| q07 | no | yes | retrieval | The answer never reached the redirect-limit logic in SessionRedirectMixin.resolve_redirects; it instead described a generic redirect pattern from a different file and missed the actual guard against infinite loops. |
+| q07 | no | yes | retrieval | The top-3 context held extract_zipped_paths, HTTPAdapter.send and Response.__init__ but not SessionRedirectMixin.resolve_redirects, so the model answered "not found in the code shown" with null file and line instead of describing the TooManyRedirects guard. |
 
 ## 2. Paste everything or search? (Step 5)
 
@@ -52,7 +52,7 @@ Which prompt did better on right place, and which on correct? Give both numbers 
 prompts. Name one question where the two prompts' replies differed, and say what
 differed.
 
-The five-part prompt did better on both metrics: it had 5 of 10 right place and 7 of 10 correct, while the minimal prompt had 0 of 10 right place and 0 of 10 correct, with only 1 of 10 valid JSON replies. One example of disagreement was q07: the five-part prompt returned the redirect-limit answer from the correct function, while the minimal prompt answered with a generic explanation from adapters.py that mentioned `redirect=False` but did not mention the actual `TooManyRedirects` guard in `SessionRedirectMixin.resolve_redirects`.
+The five-part prompt did better on both metrics: it had 5 of 10 right place and 7 of 10 correct, while the minimal prompt had 0 of 10 right place and 0 of 10 correct, with only 1 of 10 valid JSON replies. One example of disagreement was q07: with the same top-3 code, which did not include `SessionRedirectMixin.resolve_redirects`, the five-part prompt answered "not found in the code shown" with null file and line, while the minimal prompt answered with a generic explanation from adapters.py that mentioned `redirect=False` but did not mention the actual `TooManyRedirects` guard.
 
 ## 4. Word search against meaning search (Step 7)
 

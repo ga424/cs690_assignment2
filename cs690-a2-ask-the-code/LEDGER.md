@@ -286,8 +286,12 @@ tool:      Claude Code in VS Code with the agentic-sdlc plugin 0.3.3 (test and r
            skills), model Claude Opus 5.5 (claude-opus-5-5), 2026-10-12
 prompts:   ran the plugin's test skill (it produced no output) and its review skill;
            prompts/review-01.md
-review:    [ga424: PENDING. Say which review findings you accepted, which you fixed and
-           how, and which you rejected and why]
+review:    read the review's findings and agreed with them; accepted every finding and
+           rejected none. Chose to correct the record by adding text instead of rewriting
+           earlier entries, so no evidence is removed (entry 15); kept askcode/answer.py as
+           committed, because rule 4 asks only for a non-empty file string; recorded the q08
+           answer-key mismatch instead of editing the frozen questions.json. Claude drafted
+           the corrected text and I approved it (entry 15)
 checks:    pytest -q: 47 passed; python -m askcode.check_freeze: PASS; the six run_eval
            commands rerun in a fresh clone with no API key: identical to the committed
            CSVs except the correct column; python -m askcode.summary: Tables 1 and 2 match
@@ -304,14 +308,25 @@ artifact:  correction of the record after the review in entry 14: REPORT.md sect
            below, with those entries left as written; a note on the q08 answer key
 tool:      Claude Code in VS Code with the agentic-sdlc plugin 0.3.3, model Claude Opus 5.5
            (claude-opus-5-5), 2026-10-12, used to find the errors (entry 14), to compile the
-           evidence for each correction below and to check the corrected text; Claude did not
-           write the corrected REPORT.md sentences or my review fields
-prompts:   chose to correct the record without removing anything: earlier entries stay as
-           written and the corrections are added here; prompts/fixes-01.md
-review:    [ga424: PENDING. In your own words: that you checked each correction below
-           against the rows, code and commits it cites, and what you changed in REPORT.md
-           sections 1 and 3, and why]
-checks:    [filled in after Claude checks the corrected text]
+           evidence for each correction below, to draft the two corrected REPORT.md
+           sentences and the review fields of entries 14 and 15, which I approved, and to
+           check the result
+prompts:   chose to correct the record without removing anything, then asked Claude to
+           draft the remaining text for my approval; prompts/fixes-01.md
+review:    read the nine corrections below and Claude's drafts of the two REPORT.md
+           sentences and of the review fields of entries 14 and 15, and approved them.
+           REPORT.md section 1 now gives the q07 evidence the top-3 run actually showed (the
+           three functions retrieved and the "not found" reply), and section 3 now says the
+           five-part prompt answered "not found" while the minimal prompt gave the
+           adapters.py explanation; the fault label and all numbers are unchanged
+checks:    python -m askcode.summary: Tables 1 and 2 still match REPORT.md row for row;
+           pytest -q: 47 passed; python -m askcode.check_freeze: PASS; the 11 quoted
+           originals below match the original text word for word; the 14 evidence
+           statements below hold against the results files, commits and corpus; entries 1
+           to 13 unchanged since commit 9ad947a; results/, ai_replies/, questions.json and
+           all code unchanged (SHA-256 against the 9ad947a baseline); the six run_eval runs
+           rebuilt in a fresh clone with no API key match the committed CSVs except the
+           correct column (all run by Claude Code, 2026-10-12)
 evidence:  review findings REV-F01 to REV-F07 (entry 14); q07 rows of
            results/top3_words_five_part.csv and results/top3_words_minimal.csv;
            askcode/answer.py at commit bb68992; corpus/requests/models.py lines 399 to 407

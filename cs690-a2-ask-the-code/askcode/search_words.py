@@ -6,9 +6,9 @@ Check your work with:  pytest tests/test_search_words.py
 
 from __future__ import annotations
 
-import math  # noqa: F401  (you will need it)
+import math
 
-from askcode.core import STOPWORDS, Chunk, words  # noqa: F401
+from askcode.core import STOPWORDS, Chunk, words
 
 
 def search_words(question: str, chunks: list[Chunk], k: int = 3) -> list[Chunk]:
@@ -34,4 +34,22 @@ def search_words(question: str, chunks: list[Chunk], k: int = 3) -> list[Chunk]:
     This is the core idea of BM25, the standard keyword search (slide 45). BM25 adds
     adjustments for how often a word repeats and for chunk length.
     """
-    raise NotImplementedError("Step 3: write search_words in askcode/search_words.py")
+    question_words = set(words(question)) - STOPWORDS
+    if not question_words or not chunks or k <= 0:
+        return []
+
+    chunk_words = [set(words(c.name + "\n" + c.text)) for c in chunks]
+    n = len(chunks)
+    weights = {}
+    for w in question_words:
+        df = sum(w in cw for cw in chunk_words)
+        if df > 0:
+            weights[w] = math.log(n / df)
+
+    scored = []
+    for index, (chunk, cw) in enumerate(zip(chunks, chunk_words)):
+        score = round(sum(weight for w, weight in weights.items() if w in cw), 6)
+        if score > 0:
+            scored.append((-score, index, chunk))
+    scored.sort(key=lambda item: (item[0], item[1]))
+    return [chunk for _, _, chunk in scored[:k]]

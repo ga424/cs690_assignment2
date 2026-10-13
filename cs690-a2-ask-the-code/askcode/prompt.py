@@ -6,7 +6,26 @@ Check your work with:  pytest tests/test_prompt.py
 
 from __future__ import annotations
 
-from askcode.core import NO_CODE, Chunk, Prompt, format_chunk  # noqa: F401
+from askcode.core import NO_CODE, Chunk, Prompt, format_chunk
+
+# The stable part of every prompt: the same text for every question, so it goes first.
+# The example question is about a made-up file, so it can never be one of the ten.
+SYSTEM = """\
+Goal: Answer a developer's question about the Python library requests, using only the code shown, and point to the line that proves the answer.
+
+Inputs and outputs: The input is some source code from requests, then a question. Each piece of code starts with a header "### file, function, lines A to B", and every line of code starts with its line number. The output is one JSON object that answers the question and names the file and the line that support the answer.
+
+Rules:
+- Answer only from the code shown. Do not use anything else you know about requests.
+- Write the file exactly as it appears in the header, and the line number exactly as it is printed at the start of the line.
+- If the code shown does not answer the question, reply with the answer "not found in the code shown" and null for both file and line.
+- Keep the answer to one or two sentences.
+
+Example:
+Question: What does add_one return when it is called with 2?
+Reply: {"answer": "It returns 3, because add_one returns x + 1.", "file": "numbers.py", "line": 2}
+
+Reply format: Reply with exactly one JSON object with the keys "answer" (a string), "file" (a string or null) and "line" (an integer or null). Write nothing before or after the object."""
 
 
 def build_prompt_five_part(question: str, chunks: list[Chunk]) -> Prompt:
@@ -37,4 +56,6 @@ def build_prompt_five_part(question: str, chunks: list[Chunk]) -> Prompt:
        the question. The question comes last. If chunks is empty, put NO_CODE under
        "Code:" instead.
     """
-    raise NotImplementedError("Step 4: write build_prompt_five_part in askcode/prompt.py")
+    code = "\n\n".join(format_chunk(c) for c in chunks) or NO_CODE
+    user = f"Code:\n{code}\n\nQuestion:\n{question}"
+    return Prompt(system=SYSTEM, user=user)

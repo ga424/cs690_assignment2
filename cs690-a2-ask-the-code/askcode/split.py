@@ -6,7 +6,7 @@ Check your work with:  pytest tests/test_split.py
 
 from __future__ import annotations
 
-import ast  # noqa: F401  (you will need it)
+import ast
 from pathlib import Path
 
 from askcode import CORPUS_DIR
@@ -40,7 +40,26 @@ def split_file(path: Path, root: Path) -> list[Chunk]:
     and each decorator node has its own .lineno. A class node has .name and .body.
     Read the file with encoding="utf-8".
     """
-    raise NotImplementedError("Step 2: write split_file in askcode/split.py")
+    source = path.read_text(encoding="utf-8")
+    lines = source.split("\n")
+    file = path.relative_to(root).as_posix()
+    chunks = []
+
+    def add(node: ast.FunctionDef | ast.AsyncFunctionDef, name: str) -> None:
+        start = min([node.lineno] + [d.lineno for d in node.decorator_list])
+        end = node.end_lineno
+        text = "\n".join(lines[start - 1 : end])
+        chunks.append(Chunk(file=file, name=name, start_line=start, end_line=end, text=text))
+
+    functions = (ast.FunctionDef, ast.AsyncFunctionDef)
+    for node in ast.parse(source).body:
+        if isinstance(node, functions):
+            add(node, node.name)
+        elif isinstance(node, ast.ClassDef):
+            for item in node.body:
+                if isinstance(item, functions):
+                    add(item, f"{node.name}.{item.name}")
+    return chunks
 
 
 def split_corpus(root: Path = CORPUS_DIR) -> list[Chunk]:
@@ -50,4 +69,8 @@ def split_corpus(root: Path = CORPUS_DIR) -> list[Chunk]:
     and sorted as plain strings. Keep each file's chunks in file order.
     For the requests codebase this returns 230 chunks.
     """
-    raise NotImplementedError("Step 2: write split_corpus in askcode/split.py")
+    paths = sorted(root.rglob("*.py"), key=lambda p: p.relative_to(root).as_posix())
+    chunks = []
+    for path in paths:
+        chunks.extend(split_file(path, root))
+    return chunks
